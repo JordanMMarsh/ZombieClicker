@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Camera cam;
-    private float weaponDamage = 10f;
+    private float weaponDamage = 1f;
     private float playerLevelMultiplier = 0.4f;
     private float fireDelay = 1f;
 
@@ -44,8 +44,9 @@ public class PlayerController : MonoBehaviour
     //Calculate player weapon damage based on current weapon and player level
     private float CalculateWeaponDamage()
     {
-        float calculatedDamage = weaponDamage * gameManager.playerLevel * playerLevelMultiplier;
-        return calculatedDamage;
+        //float calculatedDamage = weaponDamage * gameManager.playerLevel * playerLevelMultiplier;
+        //return calculatedDamage;
+        return 1.0f;
     }
 
     #region Player Controlled Shooting
@@ -109,7 +110,8 @@ public class PlayerController : MonoBehaviour
         if (target != null && target.health.healthState == ZombieHealth.ZombieHealthState.alive)
         {
             //Deal damage to target and look at them
-            bool targetDead = target.health.DealDamage(CalculateWeaponDamage());
+            float weaponDmg = CalculateWeaponDamage();
+            bool targetDead = target.health.DealDamage(weaponDmg);
             transform.LookAt(target.transform);
 
             //If damage kills target, give player currency reward and get new target

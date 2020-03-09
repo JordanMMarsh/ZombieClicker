@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         {
             playerCurrency -= upgradeCost;
             playerLevel++;
-            upgradeCost = (int)(1.5f * upgradeCost);
+            upgradeCost *= upgradeCost;
             UpdateCurrencyText();
             UpdatePlayerLevelText();
             UpdateUpgradeCostText();

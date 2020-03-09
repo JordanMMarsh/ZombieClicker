@@ -16,6 +16,7 @@ public class ZombieHealth : MonoBehaviour
     MeshRenderer meshRenderer;
     CapsuleCollider capsuleCollider;
     ZombiePool zombiePool;
+    ZombieController zombieController;
     GameManager gameManager;
 
     void Awake()
@@ -24,6 +25,7 @@ public class ZombieHealth : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         zombiePool = FindObjectOfType<ZombiePool>();
+        zombieController = GetComponent<ZombieController>();
         gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -34,7 +36,9 @@ public class ZombieHealth : MonoBehaviour
 
     public void CalculateMaxHealth()
     {
-        maxHealth = Mathf.Round(gameManager.playerLevel * healthMultiplier);
+        //maxHealth = Mathf.Round(gameManager.playerLevel * healthMultiplier);
+        maxHealth = 100f;
+        currentHealth = maxHealth;
     }
 
     public bool DealDamage(float damage)
@@ -45,6 +49,7 @@ public class ZombieHealth : MonoBehaviour
             healthState = ZombieHealthState.dead;
             meshRenderer.material.color = Color.black;
             capsuleCollider.enabled = false;
+            zombieController.StopAttack();
             StartCoroutine(DeathTimer());
             return true;
         }

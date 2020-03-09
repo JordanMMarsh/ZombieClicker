@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Core\GameManager.cs" />
     <Compile Include="Assets\Scripts\Level\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Targeting\TargetManager.cs" />
     <Compile Include="Assets\Scripts\Targeting\TargetSphere.cs" />
     <Compile Include="Assets\Scripts\Zombie Spawner\ZombieLookup.cs" />
