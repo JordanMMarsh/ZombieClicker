@@ -27,8 +27,8 @@ public class ZombieController : MonoBehaviour
     {
         if (health.healthState == ZombieHealth.ZombieHealthState.alive && Vector3.Distance(transform.position, player.position) > attackDistance)
         {
-            transform.LookAt(player.transform);
             transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            transform.LookAt(player);
         }
         else if (health.healthState == ZombieHealth.ZombieHealthState.alive && Vector3.Distance(transform.position, player.position) <= attackDistance)
         {

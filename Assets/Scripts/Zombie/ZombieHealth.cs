@@ -13,8 +13,7 @@ public class ZombieHealth : MonoBehaviour
     private float maxHealth = 20f;
     private float currentHealth;
     private float healthMultiplier = 1.2f;
-    MeshRenderer meshRenderer;
-    CapsuleCollider capsuleCollider;
+    SphereCollider sphereCollider;
     ZombiePool zombiePool;
     ZombieController zombieController;
     GameManager gameManager;
@@ -22,8 +21,7 @@ public class ZombieHealth : MonoBehaviour
     void Awake()
     {
         currentHealth = maxHealth;
-        meshRenderer = GetComponent<MeshRenderer>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        sphereCollider = GetComponent<SphereCollider>();
         zombiePool = FindObjectOfType<ZombiePool>();
         zombieController = GetComponent<ZombieController>();
         gameManager = FindObjectOfType<GameManager>();
@@ -47,10 +45,10 @@ public class ZombieHealth : MonoBehaviour
         if (currentHealth <= 0 && healthState == ZombieHealthState.alive)
         {
             healthState = ZombieHealthState.dead;
-            meshRenderer.material.color = Color.black;
-            capsuleCollider.enabled = false;
+            sphereCollider.enabled = false;
             zombieController.StopAttack();
             StartCoroutine(DeathTimer());
+            transform.Rotate(-90f, 0f, 0f);
             return true;
         }
         else
@@ -63,8 +61,8 @@ public class ZombieHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthState = ZombieHealthState.alive;
-        meshRenderer.material.color = Color.white;
-        capsuleCollider.enabled = true;
+        sphereCollider.enabled = true;
+        transform.Rotate(90f, 0f, 0f);
     }
 
     private IEnumerator DeathTimer()

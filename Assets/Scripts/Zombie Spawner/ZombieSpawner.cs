@@ -19,7 +19,7 @@ public class ZombieSpawner : MonoBehaviour
     {
         //Grab zombie game object from pool and set its position to this spawner and set the object as active
         GameObject newZombie = zombiePool.GetZombie();
-        newZombie.transform.position = transform.position;
+        newZombie.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
         newZombie.SetActive(true);
 
         //Then grab its controller from the zombie lookup and recalculate max health based on player level
